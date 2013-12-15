@@ -1,0 +1,16 @@
+Hi All,
+Please find below the list of programs that we have discussed until now. Please complete these programs by EOD sunday and check into your github repo named "dsa". As mentioned before, you should have one folder for each of these programs mentioned here in the "dsa" repo (create the folder names as per the bolded names below).
+
+All these programs should be written to support generic datatype - void*. Similarly, all these programs should have good and detailed tests associated with them. Please don't use memcpy or any such operations.
+
+ stack-with-memcpy => Develop a stack - using dynamic memory (malloc). One change: Please ensure that stack grows when more elements are added.
+ stack => Develop a stack - using dynamic memory (malloc). One change: Please ensure that stack grows when more elements are added.
+ bracket-matching => Use the Stack library as a binary.  
+ insertion-sort => Insertion Sorting - code that we did yesterday (improved version)
+ queue => Use the array / contiguous memory. Shift / Copy the items as the items are dequeued.
+ circular-queue => Circular Queue should be built using array / contiguous memory allocated in heap.
+ linked-list => Singly / doubly Linked List
+ binary-search => Binary Search
+ priority-queue => Priority queue using array or linked list.
+ os-scheduler => Operating System scheduler using priority queue (please don't work on top of the test folder, create a new folder and complete it)
+ stack-using-linked-list => Implement Stack using LinkedList that can grow as elements are pushed
