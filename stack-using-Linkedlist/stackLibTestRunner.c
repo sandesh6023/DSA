@@ -49,9 +49,19 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_insert_element_into_stack");
+	testStarted("test_insert_element_into_intStack");
 	setup();
-		test_insert_element_into_stack();
+		test_insert_element_into_intStack();
+	tearDown();
+	testEnded();
+	testStarted("test_insert_floatElement_into_floatStack");
+	setup();
+		test_insert_floatElement_into_floatStack();
+	tearDown();
+	testEnded();
+	testStarted("test_insert_element_into_charStack");
+	setup();
+		test_insert_element_into_charStack();
 	tearDown();
 	testEnded();
 	testStarted("test_pop_the_element_from_Stack");
@@ -62,6 +72,11 @@ int main(){
 	testStarted("test_pop_should_return_0_when_stack_is_empty");
 	setup();
 		test_pop_should_return_0_when_stack_is_empty();
+	tearDown();
+	testEnded();
+	testStarted("test_pop_should_pop_element_from_charStack");
+	setup();
+		test_pop_should_pop_element_from_charStack();
 	tearDown();
 	testEnded();
 	testStarted("test_push_string_into_StringStack");

@@ -22,6 +22,41 @@ void test_insert_element_into_intStack(){
 	ASSERT(33 == insertedValue);
 }
 
+void test_insert_floatElement_into_floatStack(){
+	List *list;
+	Node *traverseTemp;
+	float insertedValue;
+	int i;
+	float value = 9.23f;
+	float value2 = 88.11f;
+	float value3 = 33.001f;
+	list = create();
+	push(list, &value);
+	push(list, &value2);
+	push(list, &value3);
+
+	traverseTemp = list->head;
+	insertedValue = *(float*)traverseTemp->data;
+	ASSERT(33.001f == insertedValue);
+}
+void test_insert_element_into_charStack(){
+	List *list;
+	Node *traverseTemp;
+	char insertedValue;
+	int i;
+	int value = 'q';
+	int value2 = 'z';
+	int value3 = 't';
+	list = create();
+	push(list, &value);
+	push(list, &value2);
+	push(list, &value3);
+
+	traverseTemp = list->head;
+	insertedValue = *(char*)traverseTemp->data;
+	ASSERT('t' == insertedValue);
+}
+
 void test_pop_the_element_from_Stack(){
 	List *list;
 	Node *traverseTemp;
@@ -58,6 +93,27 @@ void test_pop_should_return_0_when_stack_is_empty(){
 
 	ASSERT(0==result);
 }
+
+void test_pop_should_pop_element_from_charStack(){
+	List *list;
+	Node *traverseTemp;
+	char insertedValue;
+	int i;
+	int value = 'q';
+	int value2 = 'z';
+	int value3 = 't';
+	list = create();
+	push(list, &value);
+	push(list, &value2);
+	push(list, &value3);
+
+	pop(list);
+
+	traverseTemp = list->head;
+	insertedValue = *(char*)traverseTemp->data;
+	ASSERT('z' == insertedValue);
+}
+
 
 void test_push_string_into_StringStack(){
 	List *list;
@@ -98,9 +154,6 @@ void test_pop_string_from_stringStack(){
 	ASSERT(0==strcmp("sandesh",expectedName));
 }
 
-
-
-
 void test_add_account_balance_to_accountStack(){
 	List *list;
 	Node *traverseTemp;
@@ -115,6 +168,5 @@ void test_add_account_balance_to_accountStack(){
 
 	traverseTemp = list->head;
 	expectedAccount = *(Account*)traverseTemp->data;
-	// printf("%d\n",expectedAccount.balance );
 	ASSERT(20000==expectedAccount.balance);
 }

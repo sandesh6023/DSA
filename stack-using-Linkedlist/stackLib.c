@@ -68,7 +68,6 @@ int pop(List *list){
 	free(temp);
 	list->top--;
 	return 1;	
-
 }
 
 
