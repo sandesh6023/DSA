@@ -1,4 +1,4 @@
-#include "../DSA/doublyLinkedList/doublyLinkedLib.h"
+#include "doublyLinkedLib.h"
 typedef struct {
 	int id;
 	int balance;
