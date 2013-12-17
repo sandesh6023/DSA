@@ -2,6 +2,8 @@
 #include "stackLib.h"
 #include <stdio.h>
 #include <string.h>
+// #include "doublyLinkedLib.o"
+
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 void test_insert_element_into_intStack(){
@@ -13,51 +15,16 @@ void test_insert_element_into_intStack(){
 	int value2 = 88;
 	int value3 = 33;
 	list = create();
-	push(list, &value);
-	push(list, &value2);
-	push(list, &value3);
+	insertBefore(list,0,&value);
+	insertBefore(list,0,&value2);
+	insertBefore(list,0,&value3);
 
 	traverseTemp = list->head;
 	insertedValue = *(int*)traverseTemp->data;
 	ASSERT(33 == insertedValue);
 }
 
-void test_insert_floatElement_into_floatStack(){
-	List *list;
-	Node *traverseTemp;
-	float insertedValue;
-	int i;
-	float value = 9.23f;
-	float value2 = 88.11f;
-	float value3 = 33.001f;
-	list = create();
-	push(list, &value);
-	push(list, &value2);
-	push(list, &value3);
-
-	traverseTemp = list->head;
-	insertedValue = *(float*)traverseTemp->data;
-	ASSERT(33.001f == insertedValue);
-}
-void test_insert_element_into_charStack(){
-	List *list;
-	Node *traverseTemp;
-	char insertedValue;
-	int i;
-	int value = 'q';
-	int value2 = 'z';
-	int value3 = 't';
-	list = create();
-	push(list, &value);
-	push(list, &value2);
-	push(list, &value3);
-
-	traverseTemp = list->head;
-	insertedValue = *(char*)traverseTemp->data;
-	ASSERT('t' == insertedValue);
-}
-
-void test_pop_the_element_from_Stack(){
+void test_deleteNode_the_element_from_Stack(){
 	List *list;
 	Node *traverseTemp;
 	int insertedValue;
@@ -66,56 +33,36 @@ void test_pop_the_element_from_Stack(){
 	int value2 = 88;
 	int value3 = 33;
 	list = create();
-	push(list, &value);
-	push(list, &value2);
-	push(list, &value3);
+	insertBefore(list,0, &value);
+	insertBefore(list,0, &value2);
+	insertBefore(list,0, &value3);
 
-	pop(list);
+	deleteNode(list,0);
 
 	traverseTemp = list->head;
 	insertedValue = *(int*)traverseTemp->data;
 	ASSERT(88 == insertedValue);
 }
 
-void test_pop_should_return_0_when_stack_is_empty(){
+void test_deleteNode_should_return_0_when_stack_is_empty(){
 	List *list;
 	int value2 = 88;
 	int value3 = 33;
 	int result;
 	list = create();
 
-	push(list, &value2);
-	push(list, &value3);
+	insertBefore(list,0, &value2);
+	insertBefore(list,0, &value3);
 
-	pop(list);
-	pop(list);
-	result = pop(list);
+	deleteNode(list,0);
+	deleteNode(list,0);
+
+	result = deleteNode(list,0);
 
 	ASSERT(0==result);
 }
 
-void test_pop_should_pop_element_from_charStack(){
-	List *list;
-	Node *traverseTemp;
-	char insertedValue;
-	int i;
-	int value = 'q';
-	int value2 = 'z';
-	int value3 = 't';
-	list = create();
-	push(list, &value);
-	push(list, &value2);
-	push(list, &value3);
-
-	pop(list);
-
-	traverseTemp = list->head;
-	insertedValue = *(char*)traverseTemp->data;
-	ASSERT('z' == insertedValue);
-}
-
-
-void test_push_string_into_StringStack(){
+void test_insertBefore_string_into_StringStack(){
 	List *list;
 	Node *traverseTemp;
 	String name1 ="san";
@@ -124,16 +71,16 @@ void test_push_string_into_StringStack(){
 	String expectedName;
 
 	list = create();
-	push(list,&name1);
-	push(list,&name2);
-	push(list,&name3);
+	insertBefore(list,0,&name1);
+	insertBefore(list,0,&name2);
+	insertBefore(list,0,&name3);
 
 	traverseTemp = list->head;
 	strcpy(expectedName,*(String*)traverseTemp->data);
 	ASSERT(0==strcmp("van",expectedName));
 }
 
-void test_pop_string_from_stringStack(){
+void test_deleteNode_string_from_stringStack(){
 	List *list;
 	Node *traverseTemp;
 	String name1 ="sandesh";
@@ -142,12 +89,12 @@ void test_pop_string_from_stringStack(){
 	String expectedName;
 
 	list = create();
-	push(list,&name1);
-	push(list,&name2);
-	push(list,&name3);
+	insertBefore(list,0,&name1);
+	insertBefore(list,0,&name2);
+	insertBefore(list,0,&name3);
 	
-	pop(list);
-	pop(list);
+	deleteNode(list,0);
+	deleteNode(list,0);
 
 	traverseTemp = list->head;
 	strcpy(expectedName,*(String*)traverseTemp->data);
@@ -162,9 +109,9 @@ void test_add_account_balance_to_accountStack(){
 	Account account3 = {114,20000};
 	Account expectedAccount;
 
-	push(list,&account1);
-	push(list,&account2);
-	push(list,&account3);
+	insertBefore(list,0,&account1);
+	insertBefore(list,0,&account2);
+	insertBefore(list,0,&account3);
 
 	traverseTemp = list->head;
 	expectedAccount = *(Account*)traverseTemp->data;

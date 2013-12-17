@@ -28,8 +28,6 @@ void insertFirstElement(List *list, void *element){
 }
 
 
-
-
 int insertNode(List *list,int index,void *element){
 	int i;
 	Node *temp;
@@ -97,7 +95,7 @@ int insertBefore(List *list,int index,void *element){
 		return 1;
 	}
 
-	if(index==0 && list->length == 1){
+	if(index==0){
 		newNode = createNode(element,NULL, temp);
 		temp->previous = newNode;
 		list->length++;
@@ -130,6 +128,7 @@ int deleteNode(List *list,int index){
 
 	if(list->length == 1){ 
 		list->head = NULL;
+		list->length--;
 		free(temp);
 		return 1;
 	}
@@ -147,7 +146,7 @@ int deleteNode(List *list,int index){
 		list->length--;
 		return 1;
 	}
-	if(list->length>2 && index == 0){
+	if(index == 0){
 		list->head = temp->next; 		//assign head to next element
 		nextNode = temp->next;
 		nextNode->previous = NULL;
