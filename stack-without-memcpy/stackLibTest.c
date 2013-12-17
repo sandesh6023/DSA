@@ -5,38 +5,22 @@
 #include <stdlib.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
-Stack expectedStack;
-int areEqual(Stack a, Stack b)
-{
-	int result;
-	return a.noOfElements == b.noOfElements;
-	if(!result)	return 0;
-	return 0 == memcmp(a.arrayOfAddresses,b.arrayOfAddresses,4*a.noOfElements);
+void dispose(void *arrayAddress,void *stackAddress){
+	free(arrayAddress);
+	free(stackAddress);
 }
-
-void test_1_create_creates_charStack_of_size_4(){
-	int value;
-	Stack *stkPtr;
-	expectedStack.arrayOfAddresses = calloc(4,sizeof(void **));
-	expectedStack.noOfElements = 4;
-	stkPtr= create(4);
-	value = areEqual(expectedStack,*stkPtr);
-	ASSERT(value);
-	free(expectedStack.arrayOfAddresses);
-}
-
 
 //------------------------------push-------------------------------
-
 void test_push_integer_element_into_stack(){
 	Stack *stkPtr;
 	int *expectedValue;
 	int inputValue = 5;
 	stkPtr= create(4);
 	push(stkPtr,&inputValue);
-
+	// printf("%p\n",stkPtr );
 	expectedValue = stkPtr->arrayOfAddresses[0];
 	ASSERT(5==*expectedValue);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
 }
 
 void test_push_char_element_into_stack(){
@@ -85,16 +69,18 @@ void test_push_string_into_stack(){
 	ASSERT(0==strcmp("tan",*expectedValue));
 }
 
-void test_push_element_into_intStack_should_return_0_inCase_of_stackOverflow(){
+void test_push_element_into_intStack_should_extend_stack_inCase_of_stackOverflow(){
 	Stack *stkPtr;
-	int result;
 	int inputValue = 5;
+	int inputValue2 = 77;
+	int expectedValue;
 	stkPtr= create(2);
 	push(stkPtr,&inputValue);
 	push(stkPtr,&inputValue);
-	result = push(stkPtr,&inputValue);
+	push(stkPtr,&inputValue2);
 
-	ASSERT(0==result);
+	expectedValue = *(int*)stkPtr->arrayOfAddresses[2];
+	ASSERT(77==expectedValue);
 }
 
 //--------------------------------pop----------------------------
@@ -116,100 +102,90 @@ void test_pop_element_from_the_int_stack(){
 	ASSERT(25==*expectedValue);
 }
 
+void test_pop_element_from_the_char_stack(){
+	char *ptr;
+	Stack *stkPtr;
+	char inputValue = 'o';
+	char inputValue2 = 'm';
+	stkPtr = create(4);
+	push(stkPtr,&inputValue);
+	push(stkPtr,&inputValue2);
+	ptr = pop(stkPtr);
+	ASSERT('m' == *ptr );
+}
 
-// void test_pop_element_from_the_char_stack(){
-// 	char *ptr;
-// 	Stack *stkPtr;
-// 	char inputValue = 'o';
-// 	char inputValue2 = 'm';
-// 	stkPtr = create(sizeof(char),4);
-// 	push(stkPtr,&inputValue);
-// 	push(stkPtr,&inputValue2);
-// 	ptr = pop(stkPtr);
-// 	ASSERT('m' == *ptr );
-// 	free(stkPtr);
-// }
+void test_pop_element_from_the_float_stack(){
+	float *ptr;
+	Stack *stkPtr;
+	float inputValue = 99.99f;
+	float inputValue2 =260.149f ;
+	stkPtr = create(4);
+	push(stkPtr,&inputValue);
+	push(stkPtr,&inputValue2);
+	ptr = pop(stkPtr);
+	ASSERT(260.149f == *ptr );
+}
 
-// void test_pop_element_from_the_float_stack(){
-// 	float *ptr;
-// 	Stack *stkPtr;
-// 	float inputValue = 99.99f;
-// 	float inputValue2 =260.149f ;
-// 	stkPtr = create(sizeof(float),4);
-// 	push(stkPtr,&inputValue);
-// 	push(stkPtr,&inputValue2);
-// 	ptr = pop(stkPtr);
-// 	ASSERT(260.149f == *ptr );
-// 	free(stkPtr);
-// }
+void test_pop_element_from_the_intStack_should_return_NUll_when_Stack_is_empty(){
+	int *ptr;
+	Stack *stkPtr;
+	stkPtr = create(4);
+	ptr = pop(stkPtr);
+	ASSERT(NULL == ptr );
+}
+//----------------------------top-------------------------------
+void test_top_should_return_element_being_pointed_by_top_for_intType(){
+	int *ptr;
+	Stack *stkPtr;
+	int inputValue = 5;
+	int inputValue2 = 16;
+	int inputValue3 = 99;
+	stkPtr = create(4);
+	push(stkPtr,&inputValue);
+	push(stkPtr,&inputValue2);
+	push(stkPtr,&inputValue3);
 
-// void test_pop_element_from_the_intStack_should_return_NUll_when_Stack_is_empty(){
-// 	int *ptr;
-// 	Stack *stkPtr;
-// 	stkPtr = create(sizeof(int),4);
-// 	ptr = pop(stkPtr);
-// 	ASSERT(NULL == ptr );
-// 	free(stkPtr);
-// }
-// //----------------------------top-------------------------------
-// void test_top_should_return_element_being_pointed_by_top_for_intType(){
-// 	int *ptr;
-// 	Stack *stkPtr;
-// 	int inputValue = 5;
-// 	int inputValue2 = 16;
-// 	int inputValue3 = 99;
-// 	stkPtr = create(sizeof(int),4);
-// 	push(stkPtr,&inputValue);
-// 	push(stkPtr,&inputValue2);
-// 	push(stkPtr,&inputValue3);
+	ptr = top(stkPtr);
+	ASSERT(99 == *ptr );
+}
 
-// 	ptr = top(stkPtr);
-// 	ASSERT(99 == *ptr );
-// }
+void test_top_should_return_element_being_pointed_by_top_for_charType(){
+	char *expectedValue;
+	Stack *stkPtr;
+	char inputValue = 'w';
+	char inputValue2 = 'l';
+	char inputValue3 = 'u';
+	stkPtr = create(4);
+	push(stkPtr,&inputValue);
+	push(stkPtr,&inputValue2);
+	push(stkPtr,&inputValue3);
 
-// void test_top_should_return_element_being_pointed_by_top_for_charType(){
-// 	char *ptr;
-// 	Stack *stkPtr;
-// 	char inputValue = 'w';
-// 	char inputValue2 = 'l';
-// 	stkPtr = create(sizeof(char),4);
-// 	push(stkPtr,&inputValue);
-// 	push(stkPtr,&inputValue2);
+	expectedValue = top(stkPtr);
+	ASSERT('u' == *expectedValue);
+}
 
-// 	ptr = top(stkPtr);
-// 	ASSERT('l' == *ptr );
-// }
+void test_top_should_return_element_being_pointed_by_top_for_floatType(){
+	float *expectedValue;
+	Stack *stkPtr;
+	float inputValue = 5.23f;
+	float inputValue2 = 1.99f;
+	float inputValue3 = 99.012f;
+	stkPtr = create(4);
+	push(stkPtr,&inputValue);
+	push(stkPtr,&inputValue2);
+	push(stkPtr,&inputValue3);
 
-// void test_top_should_return_element_being_pointed_by_top_for_floatType(){
-// 	float *ptr;
-// 	Stack *stkPtr;
-// 	float inputValue = 5.23f;
-// 	float inputValue2 = 1.99f;
-// 	float inputValue3 = 99.012f;
-// 	stkPtr = create(sizeof(float),4);
-// 	push(stkPtr,&inputValue);
-// 	push(stkPtr,&inputValue2);
-// 	push(stkPtr,&inputValue3);
+	expectedValue = top(stkPtr);
+	ASSERT(99.012f == *expectedValue);
+}
 
-// 	ptr = top(stkPtr);
-// 	ASSERT(99.012f == *ptr );
-// }
-// void test_top_should_return_NULL_when_intStack_is_empty(){
-// 	int *ptr;
-// 	Stack *stkPtr;
-// 	stkPtr = create(sizeof(int),4);
-// 	ptr = top(stkPtr);
-// 	ASSERT(NULL == ptr);
-// }
-
-
-
-
-
-
-
-
-
+void test_top_should_return_NULL_when_intStack_is_empty(){
+	int *ptr;
+	Stack *stkPtr;
+	stkPtr = create(4);
+	ptr = top(stkPtr);
+	ASSERT(NULL == ptr);
+}
 
 
 // void test_create_creates_intStack_of_size_4(){
