@@ -35,6 +35,8 @@ void test_push_char_element_into_stack(){
 
 	expectedValue = stkPtr->arrayOfAddresses[1];
 	ASSERT('z'==*expectedValue);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_push_float_element_into_stack(){
@@ -51,6 +53,8 @@ void test_push_float_element_into_stack(){
 
 	expectedValue = stkPtr->arrayOfAddresses[2];
 	ASSERT(221.234f==*expectedValue);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_push_string_into_stack(){
@@ -67,6 +71,8 @@ void test_push_string_into_stack(){
 
 	expectedValue = stkPtr->arrayOfAddresses[2];
 	ASSERT(0==strcmp("tan",*expectedValue));
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_push_element_into_intStack_should_extend_stack_inCase_of_stackOverflow(){
@@ -81,6 +87,8 @@ void test_push_element_into_intStack_should_extend_stack_inCase_of_stackOverflow
 
 	expectedValue = *(int*)stkPtr->arrayOfAddresses[2];
 	ASSERT(77==expectedValue);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 //--------------------------------pop----------------------------
@@ -100,6 +108,8 @@ void test_pop_element_from_the_int_stack(){
 	ASSERT(59==*expectedValue);
 	expectedValue = pop(stkPtr);
 	ASSERT(25==*expectedValue);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_pop_element_from_the_char_stack(){
@@ -112,6 +122,8 @@ void test_pop_element_from_the_char_stack(){
 	push(stkPtr,&inputValue2);
 	ptr = pop(stkPtr);
 	ASSERT('m' == *ptr );
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_pop_element_from_the_float_stack(){
@@ -124,6 +136,8 @@ void test_pop_element_from_the_float_stack(){
 	push(stkPtr,&inputValue2);
 	ptr = pop(stkPtr);
 	ASSERT(260.149f == *ptr );
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_pop_element_from_the_intStack_should_return_NUll_when_Stack_is_empty(){
@@ -132,6 +146,8 @@ void test_pop_element_from_the_intStack_should_return_NUll_when_Stack_is_empty()
 	stkPtr = create(4);
 	ptr = pop(stkPtr);
 	ASSERT(NULL == ptr );
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 //----------------------------top-------------------------------
 void test_top_should_return_element_being_pointed_by_top_for_intType(){
@@ -147,6 +163,8 @@ void test_top_should_return_element_being_pointed_by_top_for_intType(){
 
 	ptr = top(stkPtr);
 	ASSERT(99 == *ptr );
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_top_should_return_element_being_pointed_by_top_for_charType(){
@@ -162,6 +180,8 @@ void test_top_should_return_element_being_pointed_by_top_for_charType(){
 
 	expectedValue = top(stkPtr);
 	ASSERT('u' == *expectedValue);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_top_should_return_element_being_pointed_by_top_for_floatType(){
@@ -177,6 +197,8 @@ void test_top_should_return_element_being_pointed_by_top_for_floatType(){
 
 	expectedValue = top(stkPtr);
 	ASSERT(99.012f == *expectedValue);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
+
 }
 
 void test_top_should_return_NULL_when_intStack_is_empty(){
@@ -185,46 +207,5 @@ void test_top_should_return_NULL_when_intStack_is_empty(){
 	stkPtr = create(4);
 	ptr = top(stkPtr);
 	ASSERT(NULL == ptr);
+	dispose(stkPtr->arrayOfAddresses,stkPtr);
 }
-
-
-// void test_create_creates_intStack_of_size_4(){
-// 	int i;
-// 	int result;
-// 	int value = 9;
-// 	int value2 =10;
-// 	int value3 = 90;
-// 	int value4 = 99;
-// 	Stack *stkPtr;
-// 	stkPtr= create(4);
-// 	push(stkPtr,&value);
-// 	push(stkPtr,&value2);
-// 	push(stkPtr,&value3);
-// 	push(stkPtr,&value4);
-// 	for(i=0;i<4;i++)
-// 		printf("%d\n",*(int*)stkPtr->arrayOfAddresses[i]);
-	
-// 	result = push(stkPtr,&value4);
-// 	ASSERT(0==result);
-// }
-
-// void test_pop_pops_element_from_stack(){
-// int i;
-// 	int *result;
-// 	int value = 9;
-// 	int value2 =10;
-// 	int value3 = 90;
-// 	int value4 = 99;
-// 	Stack *stkPtr;
-// 	stkPtr= create(4);
-// 	push(stkPtr,&value);
-// 	push(stkPtr,&value2);
-// 	push(stkPtr,&value3);
-// 	push(stkPtr,&value4);
-// 	for(i=0;i<4;i++)
-// 		printf("%d\n",*(int*)stkPtr->arrayOfAddresses[i]);
-	
-// 	result = pop(stkPtr);
-// 	ASSERT(99==*result);
-
-// }
