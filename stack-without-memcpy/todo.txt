@@ -1,0 +1,8 @@
+Given that you are eagerly looking forward to celebrate your week end by programming, I would like to give you the following assignments to help you celebrate :-)
+Please design and implement a Stack data structure that can take in any type of data. As a consumer of your Stack program, I will import your header file and write my program against it. I will compile against your object file. So, highlights of your Stack DS should be:
+Stack should support any data type (once created using new / create method, one stack instance need to support only one type)
+As a consumer of your stack, I should be able to specify the capacity of Stack
+It should support : push, pop, top operations as we discussed in today's session
+This should be test driven. It would be great if you can try out CUnit for a change.
+Please write the program on your own.
+Watch the "01-Introduction to Data Structures And Algorithms-lec01" video and try to understand all the details. We will have some questions/answers on Monday.
