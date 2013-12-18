@@ -7,113 +7,117 @@
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 void test_insert_element_into_intStack(){
-	List *list;
+	List *stack;
 	Node *traverseTemp;
 	int insertedValue;
 	int i;
 	int value = 9;
 	int value2 = 88;
 	int value3 = 33;
-	list = create();
-	insertBefore(list,0,&value);
-	insertBefore(list,0,&value2);
-	insertBefore(list,0,&value3);
+	stack = create();
+	
+	push(stack,&value);
+	push(stack,&value2);
+	push(stack,&value3);
 
-	traverseTemp = list->head;
+	traverseTemp = stack->head;
 	insertedValue = *(int*)traverseTemp->data;
 	ASSERT(33 == insertedValue);
 }
 
 void test_deleteNode_the_element_from_Stack(){
-	List *list;
+	List *stack;
 	Node *traverseTemp;
 	int insertedValue;
 	int i;
 	int value = 9;
 	int value2 = 88;
 	int value3 = 33;
-	list = create();
-	insertBefore(list,0, &value);
-	insertBefore(list,0, &value2);
-	insertBefore(list,0, &value3);
+	stack = create();
+	
+	push(stack,&value);
+	push(stack,&value2);
+	push(stack,&value3);
 
-	deleteNode(list,0);
+	pop(stack);
 
-	traverseTemp = list->head;
+	traverseTemp = stack->head;
 	insertedValue = *(int*)traverseTemp->data;
 	ASSERT(88 == insertedValue);
 }
 
 void test_deleteNode_should_return_0_when_stack_is_empty(){
-	List *list;
+	List *stack;
 	int value2 = 88;
 	int value3 = 33;
 	int result;
-	list = create();
+	stack = create();
 
-	insertBefore(list,0, &value2);
-	insertBefore(list,0, &value3);
+	push(stack,&value2);
+	push(stack,&value3);
 
-	deleteNode(list,0);
-	deleteNode(list,0);
 
-	result = deleteNode(list,0);
+	pop(stack);
+	pop(stack);
+
+	result = pop(stack);
 
 	ASSERT(0==result);
 }
 
 void test_insertBefore_string_into_StringStack(){
-	List *list;
+	List *stack;
 	Node *traverseTemp;
 	String name1 ="san";
 	String name2 = "dan";
 	String name3 = "van";
 	String expectedName;
 
-	list = create();
-	insertBefore(list,0,&name1);
-	insertBefore(list,0,&name2);
-	insertBefore(list,0,&name3);
+	stack = create();
+	push(stack,&name1);
+	push(stack,&name2);
+	push(stack,&name3);
 
-	traverseTemp = list->head;
+	traverseTemp = stack->head;
 	strcpy(expectedName,*(String*)traverseTemp->data);
 	ASSERT(0==strcmp("van",expectedName));
 }
 
 void test_deleteNode_string_from_stringStack(){
-	List *list;
+	List *stack;
 	Node *traverseTemp;
 	String name1 ="sandesh";
 	String name2 = "soumya";
 	String name3 = "vandal";
 	String expectedName;
 
-	list = create();
-	insertBefore(list,0,&name1);
-	insertBefore(list,0,&name2);
-	insertBefore(list,0,&name3);
-	
-	deleteNode(list,0);
-	deleteNode(list,0);
+	stack = create();
 
-	traverseTemp = list->head;
+	push(stack,&name1);
+	push(stack,&name2);
+	push(stack,&name3);
+	
+	pop(stack);
+	pop(stack);
+
+	traverseTemp = stack->head;
 	strcpy(expectedName,*(String*)traverseTemp->data);
 	ASSERT(0==strcmp("sandesh",expectedName));
 }
 
 void test_add_account_balance_to_accountStack(){
-	List *list;
+	List *stack;
 	Node *traverseTemp;
 	Account account1 = {112,10000};
 	Account account2 = {113,12000};
 	Account account3 = {114,20000};
 	Account expectedAccount;
 
-	insertBefore(list,0,&account1);
-	insertBefore(list,0,&account2);
-	insertBefore(list,0,&account3);
+	push(stack,&account1);
+	push(stack,&account2);
+	push(stack,&account3);
 
-	traverseTemp = list->head;
+	traverseTemp = stack->head;
 	expectedAccount = *(Account*)traverseTemp->data;
 	ASSERT(20000==expectedAccount.balance);
 }

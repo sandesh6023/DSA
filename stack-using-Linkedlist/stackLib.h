@@ -5,3 +5,6 @@ typedef struct {
 }Account;
 
 typedef char String[256];
+
+int push(List *stack,void *element);
+int pop(List *stack);
