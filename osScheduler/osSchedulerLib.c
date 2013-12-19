@@ -52,6 +52,12 @@ int timeSlice(Scheduler *processes){
     if(processes->head == NULL)
         return 0;
     temp = processes->head;
+    
+    if(temp->processTime==0){
+        processes->head = temp->next;
+        return 1;
+    }
+
     temp->processTime -=10;
     temp->processStatus.running=0;
     temp->processStatus.waiting=1;

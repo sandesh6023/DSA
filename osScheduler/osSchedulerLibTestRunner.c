@@ -69,6 +69,11 @@ int main(){
 		test_timeSlice_executes_first_Process_for_10_seconds_and_changes_status();
 	tearDown();
 	testEnded();
+	testStarted("test_timeSlice_removes_processs_once_the_execution_of_process_in_Queue_is_over");
+	setup();
+		test_timeSlice_removes_processs_once_the_execution_of_process_in_Queue_is_over();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

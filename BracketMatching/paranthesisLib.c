@@ -2,6 +2,7 @@
 #include "stackLib.h"
 #include <stdio.h>
 #include <string.h>
+
 int doBracketsMatch(char *text){
 	Stack *stack ;
 	Stack *stack2;

@@ -1,11 +1,10 @@
 #include "testUtils.h"
 #include <stdio.h>
 #include "osSchedulerLib.h"
+#include <string.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
-
 Scheduler *queue;
-
 
 void test_add_first_process_to_priorityQueue(){
         Status statusp1 = {0,0,0};
@@ -36,7 +35,7 @@ void test_timeSlice_executes_first_Process_for_10_seconds_and_changes_status(){
 
         Process *value;
         Process p1 = {"p1",40,statusp1,3,NULL};
-        Process p2 = {"p2",10,statusp1,1,NULL};
+        Process p2 = {"p2",20,statusp1,1,NULL};
         Process p3 = {"p3",10,statusp1,2,NULL};
 
         queue = create();
@@ -46,8 +45,30 @@ void test_timeSlice_executes_first_Process_for_10_seconds_and_changes_status(){
 
         result = timeSlice(queue);
         ASSERT(1==queue->head->processStatus.waiting);
-        // value = queue->head;
-        // printf("1st node %d\n",value->processPriority);
-        // value = value->next;
-        // printf("2nd node %d\n",value->processPriority);
+        value = queue->head;
+        ASSERT(10==value->processTime);
+}
+
+void test_timeSlice_removes_processs_once_the_execution_of_process_in_Queue_is_over(){
+        Status statusp1 = {0,0,0};
+        int result;
+
+        Process *value;
+        Process p1 = {"p1",40,statusp1,3,NULL};
+        Process p2 = {"p2",20,statusp1,1,NULL};
+        Process p3 = {"p3",10,statusp1,2,NULL};
+
+        queue = create();
+        ASSERT(1 == insertProcess(queue, &p1));
+        ASSERT(2 == insertProcess(queue, &p2));       
+        ASSERT(3 == insertProcess(queue, &p3));       
+
+        result = timeSlice(queue);
+        ASSERT(1==queue->head->processStatus.waiting);
+        value = queue->head;
+        ASSERT(10==value->processTime);
+        result = timeSlice(queue);
+        ASSERT(1==result);
+        result = timeSlice(queue);
+        ASSERT(strcmp("p2",queue->head->processName));
 }

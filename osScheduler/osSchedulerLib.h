@@ -20,5 +20,3 @@ typedef struct{
 Scheduler* create();
 int timeSlice(Scheduler *processes);
 int insertProcess(Scheduler *queue, Process *process);
-Process* removeProcess(Scheduler *queue);
-
