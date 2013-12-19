@@ -5,6 +5,7 @@
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
+List *list;
 
 int areEqual(List a, List b)
 {
@@ -18,7 +19,7 @@ int areEqual2(Node a, Node b)
 
 void test_create_list_and_assign_NULL_to_head(){
 	List expectedList;
-	List *list;
+	
 	expectedList.length = 0;
 	expectedList.head = NULL;
 	list = create();
@@ -40,7 +41,7 @@ void test_create_node_and_assign_values(){
 }
 
 void test_insertNode_when_linked_list_is_empty(){
-	List *list;
+	
 	int element = 9;
 	int *insertedValue;
 	list = create();
@@ -52,7 +53,7 @@ void test_insertNode_when_linked_list_is_empty(){
 }
 
 void test_insertNode_should_return_0_when_index_greater_than_length(){
-	List *list;
+	
 	int value;
 	int element = 9;
 	list = create();
@@ -65,7 +66,7 @@ void test_insertNode_should_return_0_when_index_greater_than_length(){
 }
 
 void test_insertNode_at_index_1(){
-	List *list;
+	
 	Node *traverseTemp;
 	int element = 9;
 	int element2 = 23;
@@ -83,7 +84,7 @@ void test_insertNode_at_index_1(){
 
 
 void test_insertNode_at_index_4(){
-	List *list;
+	
 	int i;
 	Node *traverseTemp;
 	int element = 9;
@@ -108,7 +109,7 @@ void test_insertNode_at_index_4(){
 }
 
 void test_insertAfter_should_insert_after_index_1(){
-	List *list;
+	
 	int i;
 	Node *traverseTemp;
 	int element = 9;
@@ -133,7 +134,7 @@ void test_insertAfter_should_insert_after_index_1(){
 }
 
 void test_insertAfter_should_insert_after_index_1_and_connect_lastNode_to_Null(){
-	List *list;
+	
 	int i;
 	Node *traverseTemp;
 	int element = 9;
@@ -157,7 +158,7 @@ void test_insertAfter_should_insert_after_index_1_and_connect_lastNode_to_Null()
 
 
 void test_insertBefore_inserts_element_when_head_is_NULL(){
-	List *list;
+	
 	int element = 9;
 	int *insertedValue;
 	list = create();
@@ -167,7 +168,7 @@ void test_insertBefore_inserts_element_when_head_is_NULL(){
 }
 
 void test_insertBefore_inserts_element_before_present_linkedList(){
-	List *list;
+	
 	int element = 9;
 	int element2 = 44;
 	int *insertedValue;
@@ -180,7 +181,7 @@ void test_insertBefore_inserts_element_before_present_linkedList(){
 }
 
 void test_insert_before_index_2_in_linked_list(){
-	List *list;
+	
 	int i;
 	Node *traverseTemp;
 	int *insertedValue;
@@ -206,7 +207,7 @@ void test_insert_before_index_2_in_linked_list(){
 }
 
 void test_deleteNode_should_return_0_when_linkedList_is_empty(){
-	List *list;
+	
 	int value;
 	list = create();
 	value = deleteNode(list,0);
@@ -214,7 +215,7 @@ void test_deleteNode_should_return_0_when_linkedList_is_empty(){
 }
 
 void test_deleteNode_returns_1_on_deleting_node(){
-	List *list;
+	
 	int value;
 	int element = 9;
 	list = create();
@@ -224,7 +225,7 @@ void test_deleteNode_returns_1_on_deleting_node(){
 }
 
 void test_deleteNode_should_delete_value_at_index_2(){
-	List *list;
+	
 	int i;
 	Node *traverseTemp;
 	int *insertedValue;
@@ -250,7 +251,7 @@ void test_deleteNode_should_delete_value_at_index_2(){
 }
 
 void test_deleteNode_should_free_the_last_node(){
-	List *list;
+	
 	int i;
 	Node *traverseTemp;
 	int *insertedValue;
@@ -276,7 +277,7 @@ void test_deleteNode_should_free_the_last_node(){
 }
 
 void test_deleteNode_should_delete_the_firstNode(){
-	List *list;
+	
 	int i;
 	Node *traverseTemp;
 	int *insertedValue;
