@@ -6,7 +6,7 @@ typedef struct{
 }Stack;
 typedef char String[256];
 
-Stack* create(int typesize, int length);
+Stack *create(int typesize, int length);
 int push(Stack *stack, void *inputElement);
 void* pop(Stack *stack);
 void* top(Stack *stack);

@@ -20,6 +20,16 @@ void test_bsearch_will_return_searched_value_if_found(){
 	ASSERT(9==*element);
 }
 
+void test_2_bsearch_will_return_when_value_is_found(){
+	int key = 7;
+	int values[10] = {1,2,3,4,5,6,7,8,9,10};
+	int noOfElements = 10;
+	int *element;
+	element = bsearch(&key,&values,noOfElements,sizeof(int),compareMyType);
+	ASSERT(7==*element);
+}
+
+
 void test_bsearch_will_return_null_when_value_is_not_found(){
 	int key = 19;
 	int values[6] = {2,6,7,34,56,90};
@@ -27,13 +37,4 @@ void test_bsearch_will_return_null_when_value_is_not_found(){
 	int *element;
 	element = bsearch(&key,&values,noOfElements,sizeof(int),compareMyType);
 	ASSERT(NULL==element);
-}
-
-void test_bsearch_will_return___when_value_is___found(){
-	int key = 7;
-	int values[10] = {1,2,3,4,5,6,7,8,9,10};
-	int noOfElements = 10;
-	int *element;
-	element = bsearch(&key,&values,noOfElements,sizeof(int),compareMyType);
-	ASSERT(7==*element);
 }

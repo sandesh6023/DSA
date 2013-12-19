@@ -22,8 +22,7 @@ void test_isort_will_sort_an_array_of_integers(){
 }
 
 int areAccountsEqual(Account* expected,Account* actual){
-    return expected->id == actual->id && 
-                                       expected->salary == actual->salary ;
+    return expected->id == actual->id && expected->salary == actual->salary ;
 }
 
 int compareAccountsBySalary(void* first, void* second){
@@ -39,4 +38,3 @@ void test_isort_will_sort_Account_based_on_salary(){
        isort(Accounts, 4, sizeof(Account), compareAccountsBySalary);
        ASSERT(1 == areAccountsEqual(expected, Accounts));
 }
-
