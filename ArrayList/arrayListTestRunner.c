@@ -109,6 +109,11 @@ int main(){
 		test_search_return_0_when_value_not_found();
 	tearDown();
 	testEnded();
+	testStarted("test_remove_should_delete_the_element_from_list_if_exists");
+	setup();
+		test_remove_should_delete_the_element_from_list_if_exists();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

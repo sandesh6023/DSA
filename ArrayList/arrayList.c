@@ -63,7 +63,6 @@ void dispose(ArrayList *list) {
 	free(list->base);
 }
 
-
 int search(ArrayList *list,void *searchValue,compareFunc comp){
 	int i;
 	if(list->length==0) return 0;
@@ -71,6 +70,21 @@ int search(ArrayList *list,void *searchValue,compareFunc comp){
 	for(i=0;i<list->length;i++){
 	 	if(comp(list->base[i],searchValue)==1)
 	 		return 1;
+	}
+	return 0;
+}
+void shiftElements(ArrayList *list,int index){
+	for(index = 0; index<list->length; index++)
+		list->base[index] = list->base[index +1];
+}
+
+int remove(ArrayList *list,void *value,compareFunc comp){
+	int i;
+	for(i=0;i<list->length;i++){
+	 	if(comp(list->base[i],value)==1){
+	 		shiftElements(list,i);
+	 		return 1;
+	 	}
 	}
 	return 0;
 }

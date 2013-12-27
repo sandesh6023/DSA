@@ -139,3 +139,16 @@ void test_search_return_0_when_value_not_found(){
 	result = search(internsPtr, &searchValue,cmpfunc);
 	ASSERT(0==result);
 }
+
+void test_remove_should_delete_the_element_from_list_if_exists(){
+	int values[4] = {36,89,33,23};
+	int result;
+	int Value = 36;
+	insert(internsPtr,0,&values[0]);
+	insert(internsPtr,1,&values[1]);
+	insert(internsPtr,2,&values[2]); 
+	insert(internsPtr,3,&values[3]); 
+
+	result = remove(internsPtr,&Value,cmpfunc);
+	ASSERT(1==result);
+}
