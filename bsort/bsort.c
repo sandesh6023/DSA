@@ -11,8 +11,8 @@ void bsort(void* base, size_t numberOfElements, size_t elementSize,
     void* elementToCompare;
     int comparisonResult;
     
-    for (i = 0; i < numberOfElements; i++) {
-    	for(j=1;j<numberOfElements;j++){
+    for (i = numberOfElements; i >0; i--) {
+    	for(j=1;j<i;j++){
     		comparisonResult = comp(base + (j*elementSize),base +((j-1)*elementSize));
 	    		if(comparisonResult == 1){
 	    			memcpy(temp,base + (j*elementSize),elementSize);
