@@ -64,6 +64,11 @@ int main(){
 		test_to_insert_child_under_root_node();
 	tearDown();
 	testEnded();
+	testStarted("test_insert_child_node_under_subroot_node");
+	setup();
+		test_insert_child_node_under_subroot_node();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

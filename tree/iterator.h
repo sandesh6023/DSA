@@ -3,5 +3,4 @@ typedef struct itrt{
 	void* list;
 	void* (*next)(struct itrt* itr);
 	int (*hasNext)(struct itrt* itr);
-
 } Iterator;

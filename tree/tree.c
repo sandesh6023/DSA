@@ -24,16 +24,29 @@ TreeNode* getTreeNode(void* parentData,void* data){
 
 TreeNode* traverse(Tree* tree, void* parentData){
 	TreeNode* treeNode = ((TreeNode*)((List*)tree->root)->head->data);
-	void* temp = ((TreeNode*)((List*)tree->root)->head->data)->data;
+	void *tempChild = treeNode->children;
+
+	void *temp = treeNode->data;
+
 	if(tree->cmp(temp,parentData))
 		return treeNode;
 	return NULL;
 }
-
+int getIndex(List *list){
+	int index=0;
+	if(list->head==NULL)
+		return index;
+	index++;
+	while(list->head->next!=NULL){
+		index++;
+	}
+	return index;
+}
 int insertNode(Tree* tree,void* parentData,void* data){
+	int index;
 	TreeNode* treenode;
 	TreeNode* parentNode;
-	if(parentData == NULL){
+	if(parentData == NULL){ 			// inserting root node
 		treenode = getTreeNode(parentData, data);
 		tree->root = create();
 		insert((List*)tree->root, 0, treenode);
@@ -41,7 +54,10 @@ int insertNode(Tree* tree,void* parentData,void* data){
 	}
 	parentNode = traverse(tree, parentData);
 	treenode =  getTreeNode(parentNode, data);
-	insert(parentNode->children, 0, treenode);
+	
+	if(treenode == NULL) 
+		return 0;
+	index = getIndex(treenode->children);
+	insert(parentNode->children,index,treenode);
 	return 1;
 }
-
