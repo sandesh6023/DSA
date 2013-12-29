@@ -62,7 +62,7 @@ int insert(List *start, int index, void *data){
 	return 1;	
 }
 
-void* remove(List *start, int index){
+void*  removeNode(List *start, int index){
 	Node *temp,*temp2;
 	int count = 1;
 	if(index >= start->length)

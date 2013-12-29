@@ -129,6 +129,11 @@ int main(){
 		test_deleteNode_should_delete_the_firstNode();
 	tearDown();
 	testEnded();
+	testStarted("test_Iterator_traverses_linkedList");
+	setup();
+		test_Iterator_traverses_linkedList();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

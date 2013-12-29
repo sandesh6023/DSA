@@ -164,3 +164,33 @@ int deleteNode(List *list,int index){
 	return 1;
 }
 
+int hasnext(Iterator* it){
+	Node* temp = ((List*)it->list)->head;
+	int count;
+	for(count = 0; count < (it->position+1); count++){
+		temp = temp->next;
+	}
+	if(temp != NULL)
+		return 1;
+	return 0;
+}
+
+void* next(Iterator* it){
+	Node* temp = ((List*)it->list)->head;
+	int count;
+	++it->position;
+	for(count = 0 ; count < it->position ; count++ ){
+		temp = temp->next;
+	}
+	return temp->data;
+}
+
+
+Iterator getIterator(List* list){
+	Iterator iterator;
+	iterator.position = -1;
+	iterator.list = list;
+	iterator.hasNext = hasnext;
+	iterator.next = next;
+	return iterator;
+}

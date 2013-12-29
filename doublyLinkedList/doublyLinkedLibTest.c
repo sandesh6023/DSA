@@ -299,3 +299,36 @@ void test_deleteNode_should_delete_the_firstNode(){
 	insertedValue =(int*)traverseTemp->data ;
 	ASSERT(23==*insertedValue);
 }
+
+void test_Iterator_traverses_linkedList(){
+	int i;
+	int element = 9;
+	int element2 = 23;
+	int element3 = 46;
+	int element4 = 99;
+	Iterator it;
+	int value;
+	void *tempElement;
+	list = create();
+
+	insertNode(list,0,&element);
+	insertNode(list,1,&element2); 
+	insertNode(list,2,&element3); 
+	insertNode(list,3,&element4); 
+
+	it = getIterator(list);
+	value = it.hasNext(&it);
+	ASSERT(1==value);
+
+	tempElement = it.next(&it);
+	ASSERT(9==*(int*)tempElement);
+
+	tempElement = it.next(&it);
+	ASSERT(23==*(int*)tempElement);
+
+	tempElement = it.next(&it);
+	ASSERT(46==*(int*)tempElement);
+
+	tempElement = it.next(&it);
+	ASSERT(99==*(int*)tempElement);
+}

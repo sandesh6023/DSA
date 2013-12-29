@@ -59,14 +59,14 @@ int main(){
 		test_to_insert_root_node();
 	tearDown();
 	testEnded();
-	testStarted("test_to_insert_child_under_root_node");
+	testStarted("test_to_insert_childNode_under_root_node");
 	setup();
-		test_to_insert_child_under_root_node();
+		test_to_insert_childNode_under_root_node();
 	tearDown();
 	testEnded();
-	testStarted("test_insert_child_node_under_subroot_node");
+	testStarted("test_insert_childNodes_under_subroot_node");
 	setup();
-		test_insert_child_node_under_subroot_node();
+		test_insert_childNodes_under_subroot_node();
 	tearDown();
 	testEnded();
 

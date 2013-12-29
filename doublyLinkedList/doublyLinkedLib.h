@@ -1,3 +1,4 @@
+#include "iterator.h"
 typedef struct node
 {
 	void *data;
@@ -16,3 +17,4 @@ int insertNode(List *list,int index,void *element);
 int insertAfter(List *list,int index,void *element);
 int insertBefore(List *list,int index,void *element);
 int deleteNode(List *list,int index);
+Iterator getIterator(List* list);

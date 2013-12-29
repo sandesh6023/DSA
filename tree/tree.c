@@ -55,3 +55,21 @@ int insertNode(Tree* tree,void* parentData,void* data){
 	insert(parentNode->children,0,treenode);
 	return 1;
 }
+
+void* getChildrenData(Iterator* it){
+        TreeNode* node;
+        Iterator treeIt = getIterator(it->list);
+        treeIt.position = it->position;
+        node = treeIt.next(&treeIt);
+        it->position++;
+        return node->data;
+}
+
+Iterator getChildren(Tree* tree,  void* data){
+        TreeNode* parentNode;
+        Iterator it;
+        parentNode = traverse((List*)tree->root, data,tree->cmp);
+        it = getIterator(parentNode->children);
+        it.next = getChildrenData;
+        return it;
+}
