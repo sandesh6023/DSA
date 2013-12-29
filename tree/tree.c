@@ -90,3 +90,4 @@ int deleteNode(Tree* tree, void *data){
 	if(treeNode == NULL)
 		return 0;
 }
+

@@ -1,4 +1,4 @@
-#include "doubleLL.h"
+#include "doublyLinkedLib.h"
 #include <stdlib.h>
 #include <stdlib.h>
 

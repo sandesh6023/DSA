@@ -1,4 +1,4 @@
-#include "doubleLL.h"
+#include "doublyLinkedLib.h"
 typedef int (*compare)(void* ID, void* data);
 
 typedef struct{
