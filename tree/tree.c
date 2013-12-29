@@ -81,3 +81,12 @@ int search(Tree* tree, void *data){
 		return 0;
 	return 1;	
 }
+
+int deleteNode(Tree* tree, void *data){
+	TreeNode* treeNode;
+	if(tree->root == NULL)
+		return 0;
+	treeNode = traverse((List*)tree->root, data, tree->cmp);
+	if(treeNode == NULL)
+		return 0;
+}

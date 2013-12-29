@@ -1,8 +1,9 @@
 #include "iterator.h"
-typedef struct Struct_type{
+
+typedef struct node{
 	void* data;
-	struct Struct_type *next;
-	struct Struct_type *previous;
+	struct node *next;
+	struct node *previous;
 } Node;
 
 typedef struct {

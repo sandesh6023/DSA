@@ -69,6 +69,11 @@ int main(){
 		test_insert_childNodes_under_subroot_node();
 	tearDown();
 	testEnded();
+	testStarted("test_insert_ChildNodes_for_1st_level");
+	setup();
+		test_insert_ChildNodes_for_1st_level();
+	tearDown();
+	testEnded();
 	testStarted("test_search_should_search_for_childNode_in_tree");
 	setup();
 		test_search_should_search_for_childNode_in_tree();
@@ -77,6 +82,16 @@ int main(){
 	testStarted("test_search_should_return_0_when_childNode_is_not_found");
 	setup();
 		test_search_should_return_0_when_childNode_is_not_found();
+	tearDown();
+	testEnded();
+	testStarted("test_deleteNode_should_return_0_when_tree_is_Empty");
+	setup();
+		test_deleteNode_should_return_0_when_tree_is_Empty();
+	tearDown();
+	testEnded();
+	testStarted("test_deleteNode_should_return_0_when_node_is_not_found");
+	setup();
+		test_deleteNode_should_return_0_when_node_is_not_found();
 	tearDown();
 	testEnded();
 
