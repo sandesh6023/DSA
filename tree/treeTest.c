@@ -39,11 +39,17 @@ void test_to_insert_child_under_root_node(){
 
 void test_insert_child_node_under_subroot_node(){
 	int result;
-	int arr[] = {1,2,3};
+	int values[] = {1,2,3};
+	Iterator it;
 	tree = createTree(comparator);
-	result = insertNode(&tree,NULL,&arr[0]);
+	result = insertNode(&tree,NULL,&values[0]);
 	ASSERT(1 == result);
-	// result = insertNode(&tree, &arr[0], &arr[1]);
-
+	result = insertNode(&tree, &values[0], &values[1]);
+	result = insertNode(&tree, &values[0], &values[2]);
 	ASSERT(1== result);
+
+	it = getIterator((List*)tree.root);
+	result = it.hasNext(&it);
+	ASSERT(1== result);
+	
 }

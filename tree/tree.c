@@ -22,26 +22,21 @@ TreeNode* getTreeNode(void* parentData,void* data){
 	return treenode;
 }
 
-TreeNode* traverse(Tree* tree, void* parentData){
-	TreeNode* treeNode = ((TreeNode*)((List*)tree->root)->head->data);
-	void *tempChild = treeNode->children;
-
-	void *temp = treeNode->data;
-
-	if(tree->cmp(temp,parentData))
-		return treeNode;
-	return NULL;
+TreeNode* traverse(List *list, void* parentData,compare cmp){
+	TreeNode* temp;
+    Iterator it = getIterator(list);
+        while(it.hasNext(&it)){
+            temp = it.next(&it);
+            if (1 == cmp(temp->data,parentData)){
+                    return temp;
+            }
+            if(temp->children->head!= NULL){
+                    return traverse(temp->children, parentData, cmp);
+            }
+        }
+        return NULL;
 }
-int getIndex(List *list){
-	int index=0;
-	if(list->head==NULL)
-		return index;
-	index++;
-	while(list->head->next!=NULL){
-		index++;
-	}
-	return index;
-}
+
 int insertNode(Tree* tree,void* parentData,void* data){
 	int index;
 	TreeNode* treenode;
@@ -52,12 +47,11 @@ int insertNode(Tree* tree,void* parentData,void* data){
 		insert((List*)tree->root, 0, treenode);
 		return 1;
 	}
-	parentNode = traverse(tree, parentData);
+	parentNode = traverse((List*)tree->root, parentData,tree->cmp);
 	treenode =  getTreeNode(parentNode, data);
 	
 	if(treenode == NULL) 
 		return 0;
-	index = getIndex(treenode->children);
-	insert(parentNode->children,index,treenode);
+	insert(parentNode->children,0,treenode);
 	return 1;
 }

@@ -1,5 +1,6 @@
 #include "doubleLL.h"
 typedef int (*compare)(void* ID, void* data);
+
 typedef struct{
 	void* root;
 	compare cmp;
