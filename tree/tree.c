@@ -41,12 +41,12 @@ int insertNode(Tree* tree,void* parentData,void* data){
 	int index;
 	TreeNode* treenode;
 	TreeNode* parentNode;
-	if(parentData == NULL){ 			// inserting root node
+	if(parentData == NULL){ 						// inserting root node
 		treenode = getTreeNode(parentData, data);
 		tree->root = create();
 		insert((List*)tree->root, 0, treenode);
 		return 1;
-	}
+	}												// Inserting sub nodes
 	parentNode = traverse((List*)tree->root, parentData,tree->cmp);
 	treenode =  getTreeNode(parentNode, data);
 	
@@ -72,4 +72,12 @@ Iterator getChildren(Tree* tree,  void* data){
         it = getIterator(parentNode->children);
         it.next = getChildrenData;
         return it;
+}
+
+int search(Tree* tree, void *data){
+	TreeNode* parentNode;
+	parentNode = traverse((List*)tree->root,data,tree->cmp);
+	if(parentNode == NULL) 
+		return 0;
+	return 1;	
 }

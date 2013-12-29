@@ -59,3 +59,39 @@ void test_insert_childNodes_under_subroot_node(){
 	temp = it.next(&it);
 	ASSERT(2==*(int*)temp);
 }
+
+void test_search_should_search_for_childNode_in_tree(){
+	int result;
+	int values[] = {1,2,3,4};
+	int searchValue = 3;
+	Iterator it;
+	void *temp;
+	tree = createTree(comparator);
+	result = insertNode(&tree,NULL,&values[0]);
+	ASSERT(1 == result);
+	result = insertNode(&tree, &values[0], &values[1]);
+	result = insertNode(&tree, &values[0], &values[2]);
+	result = insertNode(&tree, &values[0], &values[3]);
+
+	ASSERT(1== result);
+	result = search(&tree, &searchValue);
+	ASSERT(1==result);
+}
+
+void test_search_should_return_0_when_childNode_is_not_found(){
+	int result;
+	int values[] = {1,2,3,4};
+	int searchValue = 9;
+	Iterator it;
+	void *temp;
+	tree = createTree(comparator);
+	result = insertNode(&tree,NULL,&values[0]);
+	ASSERT(1 == result);
+	result = insertNode(&tree, &values[0], &values[1]);
+	result = insertNode(&tree, &values[0], &values[2]);
+	result = insertNode(&tree, &values[0], &values[3]);
+
+	ASSERT(1== result);
+	result = search(&tree, &searchValue);
+	ASSERT(0==result);
+}

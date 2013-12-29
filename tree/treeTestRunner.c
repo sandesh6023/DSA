@@ -69,6 +69,16 @@ int main(){
 		test_insert_childNodes_under_subroot_node();
 	tearDown();
 	testEnded();
+	testStarted("test_search_should_search_for_childNode_in_tree");
+	setup();
+		test_search_should_search_for_childNode_in_tree();
+	tearDown();
+	testEnded();
+	testStarted("test_search_should_return_0_when_childNode_is_not_found");
+	setup();
+		test_search_should_return_0_when_childNode_is_not_found();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
