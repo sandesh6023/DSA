@@ -165,6 +165,7 @@ void test_access_each_Element_Using_Iterator(){
 	insert(internsPtr,2,&values[2]); 
 	result = insert(internsPtr,3,&values[3]); 
 	ASSERT(1 == result);
+	
 	ListIt = getIterator(internsPtr);
 	hasValue = ListIt.hasNext(&ListIt);
 	ASSERT(1==hasValue);
