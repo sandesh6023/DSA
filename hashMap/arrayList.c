@@ -1,6 +1,6 @@
 #include "arrayList.h"
 #include <stdlib.h>
-
+#include "Iterator.h"
 ArrayList create(int capacity) {
 	ArrayList list;
 	list.base = (void*)malloc(sizeof(void*) * capacity);
@@ -59,7 +59,7 @@ int add(ArrayList *list,void *data){
 	return 1;
 }
 
-void dispose(ArrayList *list) {
+void disposeList(ArrayList *list) {
 	free(list->base);
 }
 

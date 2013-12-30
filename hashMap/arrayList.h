@@ -1,4 +1,3 @@
-#include "iterator.h"
 typedef struct {
 	void** base;
 	int capacity;
@@ -12,7 +11,6 @@ ArrayList create(int capacity);
 int insert(ArrayList *list, int index, void* data);
 void* get(ArrayList *list, int index);
 int add(ArrayList *list,void *data);
-void dispose(ArrayList *list);
+void disposeList(ArrayList *list);
 int search(ArrayList *list,void *searchValue,compareFunc comp);
 int remove(ArrayList *list,void *value,compareFunc comp);
-Iterator getIterator(ArrayList* list);
