@@ -88,3 +88,24 @@ int remove(ArrayList *list,void *value,compareFunc comp){
 	}
 	return 0;
 }
+
+int hasnext(Iterator* it){
+    ArrayList* temp = (ArrayList*)it->list;
+    if(temp->base[it->position+1] != NULL)
+            return 1;
+    return 0;
+}
+
+void* accessNextElement(Iterator* it){
+    ArrayList* temp = (ArrayList*)it->list;
+    return temp->base[++it->position];        
+}
+
+Iterator getIterator(ArrayList* list){
+    Iterator it;
+    it.position = -1;
+    it.list = list;
+    it.hasNext = hasnext;
+    it.next = accessNextElement;
+    return it;
+}

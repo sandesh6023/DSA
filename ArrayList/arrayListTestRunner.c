@@ -114,6 +114,11 @@ int main(){
 		test_remove_should_delete_the_element_from_list_if_exists();
 	tearDown();
 	testEnded();
+	testStarted("test_access_each_Element_Using_Iterator");
+	setup();
+		test_access_each_Element_Using_Iterator();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

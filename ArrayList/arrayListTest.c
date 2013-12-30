@@ -152,3 +152,32 @@ void test_remove_should_delete_the_element_from_list_if_exists(){
 	result = remove(internsPtr,&Value,cmpfunc);
 	ASSERT(1==result);
 }
+
+void test_access_each_Element_Using_Iterator(){
+	int values[4] = {36,89,33,23};
+	int result;
+	int hasValue;
+	void * recievedValue;
+	Iterator ListIt;
+	int Value = 36;
+	insert(internsPtr,0,&values[0]);
+	insert(internsPtr,1,&values[1]);
+	insert(internsPtr,2,&values[2]); 
+	result = insert(internsPtr,3,&values[3]); 
+	ASSERT(1 == result);
+	ListIt = getIterator(internsPtr);
+	hasValue = ListIt.hasNext(&ListIt);
+	ASSERT(1==hasValue);
+
+	recievedValue = ListIt.next(&ListIt);
+	ASSERT(36 == *(int*)recievedValue);
+
+	recievedValue = ListIt.next(&ListIt);
+	ASSERT(89 == *(int*)recievedValue);
+
+	recievedValue = ListIt.next(&ListIt);
+	ASSERT(33 == *(int*)recievedValue);
+
+	recievedValue = ListIt.next(&ListIt);
+	ASSERT(23 == *(int*)recievedValue);
+}
