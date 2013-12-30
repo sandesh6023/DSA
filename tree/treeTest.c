@@ -106,8 +106,8 @@ void test_search_should_return_0_when_childNode_is_not_found(){
 	tree = createTree(comparator);
 	result = insertNode(&tree,NULL,&values[0]);
 	ASSERT(1 == result);
-	result = insertNode(&tree, &values[0], &values[1]);
-	result = insertNode(&tree, &values[0], &values[2]);
+	insertNode(&tree, &values[0], &values[1]);
+	insertNode(&tree, &values[0], &values[2]);
 	result = insertNode(&tree, &values[0], &values[3]);
 
 	ASSERT(1== result);
@@ -132,9 +132,26 @@ void test_deleteNode_should_return_0_when_node_is_not_found(){
 	tree = createTree(comparator);
 	result = insertNode(&tree,NULL,&values[0]);
 	ASSERT(1 == result);
-	result = insertNode(&tree, &values[0], &values[1]);
-	result = insertNode(&tree, &values[0], &values[2]);
-	result = insertNode(&tree, &values[0], &values[3]);
+	insertNode(&tree, &values[0], &values[1]);
+	insertNode(&tree, &values[0], &values[2]);
+	insertNode(&tree, &values[0], &values[3]);
 	result = deleteNode(&tree,&valueToBeDeleted);
 	ASSERT(0==result);
+}
+
+void test_deleteNode_should_delete_childNode_if_it_exists(){
+	int result;
+	int values[] = {1,2,3,4};
+	int valueToBeDeleted = 3;
+	Iterator it;
+	void *temp;
+	tree = createTree(comparator);
+	result = insertNode(&tree,NULL,&values[0]);
+	ASSERT(1 == result);
+	insertNode(&tree, &values[0], &values[1]);
+	insertNode(&tree, &values[0], &values[2]);
+	result = insertNode(&tree, &values[0], &values[3]);
+
+	result = deleteNode(&tree,&valueToBeDeleted);
+	ASSERT(1==result);
 }

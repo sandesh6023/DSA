@@ -13,7 +13,7 @@ typedef struct {
 
 List* create();
 int insert(List* start, int index, void* data);
-void* removeNode(List* start, int index);
+int removeNode(List *list,int index);
 void dispose(List* start);
 int isEmpty(List* start);
 Iterator getIterator(List* list);

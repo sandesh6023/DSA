@@ -94,6 +94,11 @@ int main(){
 		test_deleteNode_should_return_0_when_node_is_not_found();
 	tearDown();
 	testEnded();
+	testStarted("test_deleteNode_should_delete_childNode_if_it_exists");
+	setup();
+		test_deleteNode_should_delete_childNode_if_it_exists();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

@@ -22,7 +22,7 @@ TreeNode* getTreeNode(void* parentData,void* data){
 	return treenode;
 }
 
-TreeNode* traverse(List *list, void* parentData,compare cmp){
+TreeNode* traverseTree(List *list, void* parentData,compare cmp){
 	TreeNode* temp;
     Iterator it = getIterator(list);
         while(it.hasNext(&it)){
@@ -31,7 +31,7 @@ TreeNode* traverse(List *list, void* parentData,compare cmp){
                     return temp;
             }
             if(temp->children->head!= NULL){
-                    return traverse(temp->children, parentData, cmp);
+                    return traverseTree(temp->children, parentData, cmp);
             }
         }
         return NULL;
@@ -47,7 +47,7 @@ int insertNode(Tree* tree,void* parentData,void* data){
 		insert((List*)tree->root, 0, treenode);
 		return 1;
 	}												// Inserting sub nodes
-	parentNode = traverse((List*)tree->root, parentData,tree->cmp);
+	parentNode = traverseTree((List*)tree->root, parentData,tree->cmp);
 	treenode =  getTreeNode(parentNode, data);
 	
 	if(treenode == NULL) 
@@ -68,7 +68,7 @@ void* getChildrenData(Iterator* it){
 Iterator getChildren(Tree* tree,  void* data){
         TreeNode* parentNode;
         Iterator it;
-        parentNode = traverse((List*)tree->root, data,tree->cmp);
+        parentNode = traverseTree((List*)tree->root, data,tree->cmp);
         it = getIterator(parentNode->children);
         it.next = getChildrenData;
         return it;
@@ -76,18 +76,34 @@ Iterator getChildren(Tree* tree,  void* data){
 
 int search(Tree* tree, void *data){
 	TreeNode* parentNode;
-	parentNode = traverse((List*)tree->root,data,tree->cmp);
+	parentNode = traverseTree((List*)tree->root,data,tree->cmp);
 	if(parentNode == NULL) 
 		return 0;
 	return 1;	
 }
 
+int getIndexOfLeafNode(Tree* tree,TreeNode* treenode,void* data){
+    Iterator it = getIterator(treenode->children);
+    int index = 0;
+    void* treeNodeData;
+    while(it.hasNext(&it)){
+            treeNodeData = ((TreeNode*)it.next(&it))->data;
+            if(tree->cmp(treeNodeData,data))
+                    return index;
+            index++;
+    }
+}
+
 int deleteNode(Tree* tree, void *data){
+	int indexOfNode;
 	TreeNode* treeNode;
 	if(tree->root == NULL)
 		return 0;
-	treeNode = traverse((List*)tree->root, data, tree->cmp);
+	treeNode = traverseTree((List*)tree->root, data, tree->cmp);
 	if(treeNode == NULL)
 		return 0;
+	indexOfNode = getIndexOfLeafNode(tree,treeNode->parent,data);
+    removeNode(treeNode->children,indexOfNode);
+        return 1;
 }
 

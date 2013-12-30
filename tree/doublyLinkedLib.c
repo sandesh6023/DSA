@@ -62,28 +62,50 @@ int insert(List *start, int index, void *data){
 	return 1;	
 }
 
-void*  removeNode(List *start, int index){
-	Node *temp,*temp2;
-	int count = 1;
-	if(index >= start->length)
-		return NULL;
+int removeNode(List *list,int index){
+	int i;
+	Node *prevNode,*nextNode;	
+	Node *temp;
+	temp = list->head;
+
+	if(list->length==0) return 0;
+
+	if(list->length == 1){ 
+		list->head = NULL;
+		list->length--;
+		free(temp);
+		return 1;
+	}
+
+	for(i=0;i<index;i++){
+		if(temp->next!=NULL)
+			temp = temp->next;
+	}
+
+	if(list->length-1==index)
+	{	
+		prevNode = temp->previous;
+		prevNode->next = NULL;
+		free(temp);
+		list->length--;
+		return 1;
+	}
 	if(index == 0){
-		temp = start->head->data;
-		start->head = start->head->next;
-		start->length--;
-		return temp;
+		list->head = temp->next; 		//assign head to next element
+		nextNode = temp->next;
+		nextNode->previous = NULL;
+		free(temp);
+		list->length--;
+		return 1;	
 	}
-	temp = start->head;
-	while(count < index){
-		temp = temp->next;
-		count++;
-	}
-	temp2=temp->next;
-	temp->next = temp->next->next;
-	if(temp->next != NULL)
-		temp->next->previous = temp;
-	start->length--;
-	return temp2->data;
+	prevNode = temp->previous;
+	nextNode = temp->next;
+
+	prevNode->next = nextNode;
+	nextNode->previous = prevNode;
+	list->length--;	
+	free(temp);
+	return 1;
 }
 
 void dispose(List* start){
@@ -126,7 +148,6 @@ void* next(Iterator* it){
 	}
 	return temp->data;
 }
-
 
 Iterator getIterator(List* list){
 	Iterator iterator;
