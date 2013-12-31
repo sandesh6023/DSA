@@ -10,7 +10,6 @@ ArrayList createList(int capacity){
 }
 
 
-
 void reallocateIfNeeded(ArrayList* list, int index){
 	int targetCapacity;
 	if(list->length >= list->capacity){

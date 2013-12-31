@@ -1,6 +1,11 @@
 #include <stdlib.h>
 #include "hash.h"
 
+typedef struct {
+    void *key;
+    void *record;
+}Record;
+
 HashMap createHashmap(HashKeyGenerator hashFunc,compare cmp){
 	HashMap hash;
 	int i;
@@ -37,7 +42,7 @@ int put(HashMap *hash,void *key,void *value){
     Record* temp;
     List* currentBucket;
     record = getRecord(key,value);
-    bucketNo = hash->hashFunc(key);
+    bucketNo = hash->hashFunc(key,hash);
     currentBucket = (List*)(hash->buckets.base[bucketNo]);
     temp = checkForExistingRecord(currentBucket,hash,key);
     if(temp == NULL)
@@ -52,28 +57,28 @@ void *getSpecificRecord(HashMap *hash , void *key){
     int bucketNo;
     Record* elem;
     List* currentBucket;
-    bucketNo = hash->hashFunc(key);
+    bucketNo = hash->hashFunc(key,hash);
     currentBucket = ((List*)(hash->buckets.base[bucketNo]));
     it = getIterator(currentBucket);
     while(it.hasNext(&it)){
-            elem = it.next(&it);
-            if(hash->cmp(elem->key,key))
-                    return elem->record;
+        elem = it.next(&it);
+        if(hash->cmp(elem->key,key))
+                return elem->record;
     }
     return NULL;
 }
 
-int deleteRecordFromHash(HashMap* hashtable, void* key){
+int deleteRecordFromHash(HashMap* hash, void* key){
     Iterator it;
     int bucketNo,index=0;
     Record* elem;
     List* currentBucket;
-    bucketNo = hashtable->hashFunc(key);
-    currentBucket = ((List*)(hashtable->buckets.base[bucketNo]));
+    bucketNo = hash->hashFunc(key,hash);
+    currentBucket = ((List*)(hash->buckets.base[bucketNo]));
     it = getIterator(currentBucket);
     while(it.hasNext(&it)){
         elem = it.next(&it);
-        if(hashtable->cmp(elem->key,key))
+        if(hash->cmp(elem->key,key))
                 break;
         index++;
     }

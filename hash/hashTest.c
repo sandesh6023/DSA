@@ -5,14 +5,14 @@
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
-int hashGenerator(void *value){
+int hashGenerator(void *value,void *hash){
 	int i;
 	int hashValue = 0;
 	char *string = (char*)value;
 	int length = strlen((char*)value);
 	for(i=0;i<length;i++)
 		hashValue += string[i];
-	return hashValue%10;
+	return hashValue % ((HashMap*)hash)->buckets.capacity;
 }
 
 int compareKeys(void *first,void *second){
@@ -124,5 +124,5 @@ void test_should_get_keys_from_hashTable(){
     answer = doublyIt.next(&doublyIt);
     ASSERT(0 == strcmp((char*)answer, keys[0]));
     disposeHashMap(&hashtable);
-
 }
+

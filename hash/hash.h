@@ -1,12 +1,8 @@
 #include "include/ArrayList.h"
 #include "include/doubleLL.h"
 
-typedef int (*HashKeyGenerator)(void *value);
+typedef int (*HashKeyGenerator)(void *value,void *modulusKey);
 
-typedef struct {
-	void *key;
-	void *record;
-}Record;
 
 typedef struct {
 	ArrayList buckets;
@@ -21,4 +17,5 @@ int put(HashMap *hash,void *key,void *value);
 void *getSpecificRecord(HashMap *hash , void *key);
 int deleteRecordFromHash(HashMap* hashtable,void* key);
 Iterator getHashMapKeys(HashMap *hash);
+void reHash(HashMap *hash);
 void disposeHashMap(HashMap *map);
