@@ -98,3 +98,14 @@ Iterator getHashMapKeys(HashMap *map){
     result = getIterator(list);
     return result;
 }
+
+void disposeHashMap(HashMap *map){
+    int i;
+    List* listOfHashObjects;
+    Iterator it;
+    for(i = 0 ; i <  map->buckets.capacity ; i++){
+        listOfHashObjects = (List*)get(map->buckets.base[i],i);
+        dispose(listOfHashObjects);
+    };
+    disposeList(&map->buckets);
+};

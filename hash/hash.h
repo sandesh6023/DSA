@@ -2,14 +2,11 @@
 #include "include/doubleLL.h"
 
 typedef int (*HashKeyGenerator)(void *value);
-typedef char String[256];
+
 typedef struct {
 	void *key;
 	void *record;
 }Record;
-
-
-// typedef int (*compare)(void *a,void *b);
 
 typedef struct {
 	ArrayList buckets;
@@ -17,8 +14,11 @@ typedef struct {
 	compare cmp;
 }HashMap;
 
+typedef char String[256];
+
 HashMap createHashmap(HashKeyGenerator hashFunc,compare cmp);
 int put(HashMap *hash,void *key,void *value);
 void *getSpecificRecord(HashMap *hash , void *key);
 int deleteRecordFromHash(HashMap* hashtable,void* key);
 Iterator getHashMapKeys(HashMap *hash);
+void disposeHashMap(HashMap *map);
