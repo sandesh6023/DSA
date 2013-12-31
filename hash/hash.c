@@ -1,9 +1,5 @@
 #include "hash.h"
 #include "stdlib.h"
-typedef struct {
-	void *key;
-	void *record;
-}Record;
 
 HashMap createHashmap(HashKeyGenerator hashFunc,compare cmp){
 	HashMap hash;
@@ -67,8 +63,7 @@ void *getSpecificRecord(HashMap *hash , void *key){
     return NULL;
 }
 
-
-int deleteRecord(HashMap* hashtable, void* key){
+int deleteRecordFromHash(HashMap* hashtable, void* key){
     Iterator it;
     int bucketNo,index=0;
     Record* elem;
@@ -84,4 +79,22 @@ int deleteRecord(HashMap* hashtable, void* key){
     }
     removeNode(currentBucket, index);
     return 1;
+}
+
+Iterator getHashMapKeys(HashMap *map){
+    Iterator it1;
+    Iterator it2;
+    Iterator result;
+    Record *data;
+    List *list = create();
+    it1 = getIteratorOfArrayList(&map->buckets);
+    while(it1.hasNext(&it1)){
+        it2 = getIterator(it1.next(&it1));
+        while(it2.hasNext(&it2)){
+           data = it2.next(&it2);
+           insert(list, 0, data->key);
+        }
+    }
+    result = getIterator(list);
+    return result;
 }

@@ -4,7 +4,7 @@
 #include <string.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
-typedef char String[256];
+
 
 int hashGenerator(void *value){
 	int i;
@@ -78,18 +78,43 @@ void test_should_Update_the_existing_record_when_user_gives_record_with_sameKey(
     ASSERT(0 == strcmp((char*)answer, values[2]));
 }
 
-void test_should_delete_a_record_from_hashtable(){
+void test_should_delete_record_from_hashMap(){
     void* answer;
 
 	HashMap hashtable = createHashmap(hashGenerator,compareKeys);
 
-    String keys[] = {"Apple"};
-    String values[] = {"Seb"};
+    String keys[] = {"aa"};
+    String values[] = {"lee"};
     int result = put(&hashtable, &keys[0], &values[0]);
     ASSERT(result == 1);
     answer = getSpecificRecord(&hashtable, &keys[0]);
     ASSERT(0 == strcmp((char*)answer, values[0]));
-    result = deleteRecord(&hashtable,&keys[0]);
+    result = deleteRecordFromHash(&hashtable,&keys[0]);
     answer = getSpecificRecord(&hashtable, &keys[0]);
     ASSERT(answer == NULL);
+}
+
+void test_should_get_keys_from_hashTable(){
+	void *answer;
+	Iterator doublyIt;
+    String keys[] = {"aaa","bbb","ccc"};
+    String values[] = {"lee","adam","jack"};
+    int result;
+		
+	HashMap hashtable = createHashmap(hashGenerator,compareKeys);
+
+    put(&hashtable, &keys[0], &values[0]);
+    put(&hashtable,&keys[1],&values[1]);
+	put(&hashtable,&keys[2],&values[2]);
+    doublyIt = getHashMapKeys(&hashtable);
+
+    result = doublyIt.hasNext(&doublyIt);
+    ASSERT(1==result);
+    answer = doublyIt.next(&doublyIt);
+
+    ASSERT(0 == strcmp((char*)answer, keys[2]));
+    answer = doublyIt.next(&doublyIt);
+    ASSERT(0 == strcmp((char*)answer, keys[1]));
+    answer = doublyIt.next(&doublyIt);
+    ASSERT(0 == strcmp((char*)answer, keys[0]));
 }
