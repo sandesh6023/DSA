@@ -13,3 +13,4 @@ typedef struct {
 HashMap createHashmap(HashKeyGenerator hashFunc,compare cmp);
 int put(HashMap *hash,void *key,void *value);
 void *getSpecificRecord(HashMap *hash , void *key);
+int deleteRecord(HashMap* hashtable,void* key);

@@ -59,21 +59,37 @@ void test_to_get_a_record_from_hashtable_when_there_are_more_elements(){
 
 
 void test_should_Update_the_existing_record_when_user_gives_record_with_sameKey(){
-        void* answer;
-        String keys[] = {"aaa","bbb"};
-        String values[] = {"lee","adam","jack"};
-		
-		HashMap hashtable = createHashmap(hashGenerator,compareKeys);
+    void* answer;
+    String keys[] = {"aaa","bbb"};
+    String values[] = {"lee","adam","jack"};
+	
+	HashMap hashtable = createHashmap(hashGenerator,compareKeys);
 
-        int result = put(&hashtable, &keys[0], &values[0]);
-        ASSERT(result == 1);
-        result = put(&hashtable,&keys[1],&values[1]);
-        ASSERT(result == 1);
-        answer = getSpecificRecord(&hashtable, &keys[1]);
-        ASSERT(0 == strcmp((char*)answer, values[1]));
-        result = put(&hashtable,&keys[1],&values[2]);
-        ASSERT(result == 1);
-        answer = getSpecificRecord(&hashtable, &keys[1]);
+    int result = put(&hashtable, &keys[0], &values[0]);
+    ASSERT(result == 1);
+    result = put(&hashtable,&keys[1],&values[1]);
+    ASSERT(result == 1);
+    answer = getSpecificRecord(&hashtable, &keys[1]);
+    ASSERT(0 == strcmp((char*)answer, values[1]));
+    result = put(&hashtable,&keys[1],&values[2]);
+    ASSERT(result == 1);
+    answer = getSpecificRecord(&hashtable, &keys[1]);
 
-        ASSERT(0 == strcmp((char*)answer, values[2]));
+    ASSERT(0 == strcmp((char*)answer, values[2]));
+}
+
+void test_should_delete_a_record_from_hashtable(){
+    void* answer;
+
+	HashMap hashtable = createHashmap(hashGenerator,compareKeys);
+
+    String keys[] = {"Apple"};
+    String values[] = {"Seb"};
+    int result = put(&hashtable, &keys[0], &values[0]);
+    ASSERT(result == 1);
+    answer = getSpecificRecord(&hashtable, &keys[0]);
+    ASSERT(0 == strcmp((char*)answer, values[0]));
+    result = deleteRecord(&hashtable,&keys[0]);
+    answer = getSpecificRecord(&hashtable, &keys[0]);
+    ASSERT(answer == NULL);
 }

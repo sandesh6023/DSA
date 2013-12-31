@@ -16,13 +16,13 @@ HashMap createHashmap(HashKeyGenerator hashFunc,compare cmp){
 	}
 	return hash;
 }
+
 Record *getRecord(void *key,void *value){
 	Record *recordInstance = malloc(sizeof(Record));
 	recordInstance->key = key;
 	recordInstance->record = value;
 	return recordInstance;
 }
-
 
 Record* checkForExistingRecord(List* currentBucket, HashMap* hashtable,void* key){
     Iterator it;
@@ -65,4 +65,23 @@ void *getSpecificRecord(HashMap *hash , void *key){
                     return elem->record;
     }
     return NULL;
+}
+
+
+int deleteRecord(HashMap* hashtable, void* key){
+    Iterator it;
+    int bucketNo,index=0;
+    Record* elem;
+    List* currentBucket;
+    bucketNo = hashtable->hashFunc(key);
+    currentBucket = ((List*)(hashtable->buckets.base[bucketNo]));
+    it = getIterator(currentBucket);
+    while(it.hasNext(&it)){
+        elem = it.next(&it);
+        if(hashtable->cmp(elem->key,key))
+                break;
+        index++;
+    }
+    removeNode(currentBucket, index);
+    return 1;
 }

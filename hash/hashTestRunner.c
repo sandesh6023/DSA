@@ -69,6 +69,11 @@ int main(){
 		test_should_Update_the_existing_record_when_user_gives_record_with_sameKey();
 	tearDown();
 	testEnded();
+	testStarted("test_should_delete_a_record_from_hashtable");
+	setup();
+		test_should_delete_a_record_from_hashtable();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
