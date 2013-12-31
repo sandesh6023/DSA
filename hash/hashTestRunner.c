@@ -59,6 +59,16 @@ int main(){
 		test_InsertValues_to_hashMap_and_access_values();
 	tearDown();
 	testEnded();
+	testStarted("test_to_get_a_record_from_hashtable_when_there_are_more_elements");
+	setup();
+		test_to_get_a_record_from_hashtable_when_there_are_more_elements();
+	tearDown();
+	testEnded();
+	testStarted("test_should_Update_the_existing_record_when_user_gives_record_with_sameKey");
+	setup();
+		test_should_Update_the_existing_record_when_user_gives_record_with_sameKey();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
