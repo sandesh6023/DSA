@@ -1,10 +1,9 @@
 #include "testUtils.h"
 #include "hash.h"
-#include "stdio.h"
+#include <stdio.h>
 #include <string.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
-
 
 int hashGenerator(void *value){
 	int i;
@@ -26,6 +25,7 @@ void test_create_HashMap_and_insertValue(){
     char* value = "Value";
     int result = put(&hashtable, key, value);
     ASSERT(result == 1);
+    disposeHashMap(&hashtable);
 }
 
 void test_InsertValues_to_hashMap_and_access_values(){
@@ -40,6 +40,8 @@ void test_InsertValues_to_hashMap_and_access_values(){
 	ASSERT(1==result);
 	expectedValue = getSpecificRecord(&hash,&keys[1]);
 	ASSERT(0==strcmp(expectedValue,values[1]));
+    disposeHashMap(&hash);
+
 }
 
 void test_to_get_a_record_from_hashtable_when_there_are_more_elements(){
@@ -54,9 +56,9 @@ void test_to_get_a_record_from_hashtable_when_there_are_more_elements(){
     result = put(&hashtable,&keys[1],&values[1]);
     ASSERT(result == 1);
     answer = getSpecificRecord(&hashtable, &keys[1]);
+    disposeHashMap(&hashtable);
 
 }
-
 
 void test_should_Update_the_existing_record_when_user_gives_record_with_sameKey(){
     void* answer;
@@ -76,6 +78,8 @@ void test_should_Update_the_existing_record_when_user_gives_record_with_sameKey(
     answer = getSpecificRecord(&hashtable, &keys[1]);
 
     ASSERT(0 == strcmp((char*)answer, values[2]));
+    disposeHashMap(&hashtable);
+
 }
 
 void test_should_delete_record_from_hashMap(){
@@ -92,6 +96,8 @@ void test_should_delete_record_from_hashMap(){
     result = deleteRecordFromHash(&hashtable,&keys[0]);
     answer = getSpecificRecord(&hashtable, &keys[0]);
     ASSERT(answer == NULL);
+    disposeHashMap(&hashtable);
+
 }
 
 void test_should_get_keys_from_hashTable(){
@@ -117,4 +123,6 @@ void test_should_get_keys_from_hashTable(){
     ASSERT(0 == strcmp((char*)answer, keys[1]));
     answer = doublyIt.next(&doublyIt);
     ASSERT(0 == strcmp((char*)answer, keys[0]));
+    disposeHashMap(&hashtable);
+
 }

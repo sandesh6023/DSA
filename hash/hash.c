@@ -1,5 +1,5 @@
+#include <stdlib.h>
 #include "hash.h"
-#include "stdlib.h"
 
 HashMap createHashmap(HashKeyGenerator hashFunc,compare cmp){
 	HashMap hash;
@@ -103,9 +103,9 @@ void disposeHashMap(HashMap *map){
     int i;
     List* listOfHashObjects;
     Iterator it;
-    for(i = 0 ; i <  map->buckets.capacity ; i++){
-        listOfHashObjects = (List*)get(map->buckets.base[i],i);
-        dispose(listOfHashObjects);
+    for(i = 0 ; i <  map->buckets.capacity ; i++){  
+        listOfHashObjects = (List*)get(&map->buckets,i);
+            disposeList(listOfHashObjects);
     };
-    disposeList(&map->buckets);
+    free(map->buckets.base);
 };

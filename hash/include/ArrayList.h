@@ -5,6 +5,7 @@ typedef struct{
 	int length;
 }ArrayList;
 typedef int (*compare) (void *valueToBeSearch, void* element);
+
 ArrayList createList(int capacity);
 int addIntoList(ArrayList* list, void* data);
 int insertIntoList(ArrayList* list, int index, void* data);
